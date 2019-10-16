@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+
+    <script>
+        // js里操作json
+        //1.编写一个json字符串
+        var jsonStr = '{"lastName"}:"tom","email":"tom@sina.com",""age":22';
+        //json字符串转换成json对象
+        var jsonObj = JSON.parse(jsonStr);
+        alert(jsonObj);
+        //json对象转换成json字符串
+        var str = JSON.stringify(jsonObj);
+        alert(str)
+
+        $(function () {
+
+            $("#show").click(function () {
+                $.ajax({
+                    type: "post",
+                    url: "getEmpsByJSON",
+                    datatype: "json",
+                    //jQuery会直接将返回到的数据转换成json字符串
+                    success: function (data) {
+                        // console.log(data);
+                        var  emps = JSON.parse(data);
+                        // console.log(emps[0].id);
+
+                        var str = "<tr><th>ID</th><th>LastName</th><th>email</th><th>gender</th><th>deptName</th></tr>>"
+                        for (var i = 0; i < emps.length; i++) {
+                            var emp = emps[i];
+                            // console.log(emp.id);
+
+                            str += "<tr><td>" + emp.id + "</td><td>" + emp.lastName + "</td><td>" + emp.email + "</td><td>" + (emp.gender == 0 ? "女" : "男") + "</td><td>" + emp.department.deptName + "</td></tr>";
+                        }
+                        $("#emptable").html(str);
+                    }
+                })
+            })
+        })
+    </script>
+</head>
+<body>
+<h1 align="center">员工信息</h1>
+<input type="button" id="show" value="显示员工信息">
+<table id="emptable" border="1px" width="70%" cellspacing="0px" align="center">
+
+</table>
+</body>
+</html>

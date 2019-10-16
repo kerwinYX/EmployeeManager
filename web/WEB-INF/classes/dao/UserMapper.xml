@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.UserMapper">
+
+    <!--User getUserByUsernameAndPassword(String username,String Password);-->
+    <select id="getUserByUsernameAndPassword" resultType="bean.User">
+        select id from TBL_USER where NAME=#{username} and PASSWORD=#{password}
+    </select>
+
+    <!--User getUsernameList();-->
+    <select id="getUsernameList" resultType="java.lang.String">
+        select NAME from TBL_USER
+    </select>
+
+    <!--void insertUser(String username,String password);-->
+    <select id="insertUser" >
+        insert into TBL_USER(name,password) values(#{username},#{password})
+    </select>
+
+ 
+
+
+</mapper>

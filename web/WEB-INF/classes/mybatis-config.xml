@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!-- 配置 -->
+    <configuration>
+
+        <properties resource="db.properties"/>
+
+
+        <settings>
+            <!-- 映射下划线到驼峰命名 -->
+            <setting name="mapUnderscoreToCamelCase" value="true"/>
+            <!--开启延迟加载-->
+            <setting name="lazyLoadingEnabled" value="true"/>
+            <!--配置按需加载-->
+            <setting name="aggressiveLazyLoading" value="false"/>
+        </settings>
+
+    <environments default="development">
+        <!-- 具体的环境 -->
+        <environment id="development">
+            <transactionManager type="JDBC" />
+
+            <dataSource type="POOLED">
+                <property name="driver" value="${jdbc.driver}" />
+                <property name="url" value="${jdbc.url}" />
+                <property name="username" value="${jdbc.username}" />
+                <property name="password" value="${jdbc.password}" />
+            </dataSource>
+        </environment>
+
+        
+        
+
+        <!-- 	<environment id="test">
+                <transactionManager type=""></transactionManager>
+                <dataSource type=""></dataSource>
+            </environment> -->
+    </environments>
+
+
+    <!--5.  引入SQL映射文件
+             <mapper>:引入一个SQL映射文件
+                 resource: 引入类路径下的SQL映射文件
+             <package>: 批量引入SQL映射文件
+                     要求: SQL映射文件 必须与 Mapper接口同名同位置.
+    -->
+    <mappers>
+         <!--<mapper resource="briup.dao.UserMapper.xml"/>-->
+        <package name="dao"/>
+    </mappers>
+
+</configuration>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="dao.EmployeeMapper">
+
+
+    <!--List<Employee> getEmps();-->
+    <select id="getEmps" resultMap="empAndDept">
+        select e.id , e.last_name,e.email,e.gender,d.DEPT_NAME
+        FROM  TBL_EMPLOYEE e,TBL_DEPT d
+        WHERE e.D_ID = d.id
+     </select>
+
+    <!--List<Employee> selectEmpsByPage(@Param("begin") Integer begin, @Param("end") Integer end);-->
+    <select id="selectEmpsByPage" resultMap="empAndDept">
+     SELECT rid,id, last_Name, email, gender, dept_name
+            FROM(select rownum rid,id, last_Name, email, gender, dept_name
+            from (select e.id id , e.last_name last_Name,e.email email,e.gender gender,d.DEPT_NAME dept_name
+            FROM  TBL_EMPLOYEE e,TBL_DEPT d
+            WHERE e.D_ID = d.id))
+      where rid between #{begin} and #{end}
+
+    </select>
+
+    <resultMap id="empAndDept" type="bean.Employee">
+        <id column="id" property="id"/>
+        <result column="last_name" property="lastName"/>
+        <result column="email" property="email"/>
+        <!--级联-->
+        <result column="gender" property="gender"/>
+        <result column="dept_name" property="department.deptName"/>
+        <!--<result column="d_id" property="department.id"/>-->
+
+        <!--关联-->
+        <!--<association property="department" javaType="bean.Department">-->
+        <!--<id column="did" property="id"/>-->
+        <!--<result column="dept_name" property="deptName"/>-->
+        <!--</association>-->
+    </resultMap>
+
+    <!--void deleteEmpBy(Integer id);-->
+    <delete id="deleteEmpBy">
+        delete from tbl_Employee where id = #{id}
+    </delete>
+
+
+    <!--void addEmp();-->
+    <!--&#45;&#45;         insert into tbl_Employee(LAST_NAME,EMAIL,GENDER,D_ID) values (#{lastName},#{email},#{gender},#{department.id})-->
+    <insert id="addEmp" parameterType="bean.Employee">
+    <selectKey  keyProperty="id" resultType="int" order="BEFORE">
+        select emp_seq.nextval from dual
+    </selectKey>
+        insert into tbl_Employee(id,LAST_NAME,EMAIL,GENDER,D_ID) values (#{id},#{lastName},#{email},#{gender},#{department.id})
+    </insert>
+
+
+
+
+</mapper>

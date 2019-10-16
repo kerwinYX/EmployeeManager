@@ -1,0 +1,74 @@
+body {
+    background: url("../image/pan.jpg") no-repeat fixed;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+}
+
+
+
+.regist-wrapper {
+    width: 1100px;
+    position: relative;
+    margin: 0 auto;
+}
+
+.d1 h1 {
+    font-size: 40px;
+    text-align: center;
+    color: darkorchid;
+}
+
+.d1 form {
+    font-size: 23px;
+    text-align: center;
+    color: chocolate;
+
+}
+
+.d1 form input {
+    height: 23px;
+}
+
+.d1 span {
+    color: red;
+    font-size: 12px;
+}
+
+.dd1 {
+    margin-top: 30px;
+    height: 100px;
+}
+
+.dd1 input {
+    height: 32px !important;
+    width: 80px;
+}
+
+.dd1 a {
+    font-size: 18px;
+    color: darkseagreen;
+    margin-left: 90px;
+}
+
+a:hover {
+    color: red;
+}
+
+.prompt{
+    position: relative;
+    left: 389px;
+    top: -230px;
+}
+
+#d1{
+    background-color:cyan;
+    width: 100px;
+    height: 100px;
+}
+
+.prompt{
+    position: relative;
+    left: 694px;
+    top: -233px;
+}
